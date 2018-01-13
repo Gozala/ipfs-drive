@@ -31,7 +31,7 @@ type CreateOptions = {
   bits?: number
 }
 
-type Lib = Class<PeerId> & {
+type PeerIdFactory = Class<PeerId> & {
   constructor(id: Buffer, privKey: RsaPrivateKey, pubKey: RsaPublicKey): void,
   create(CreateOptions, Callback<Error, PeerId>): void,
   create(Callback<Error, PeerId>): void,
@@ -45,7 +45,8 @@ type Lib = Class<PeerId> & {
 }
 
 declare module "peer-id" {
-  declare export default Lib
+  declare export default PeerIdFactory
+  declare export type PeerIdFactory = PeerIdFactory
   declare export type PeerId = PeerId
   declare export type JSONPeerId = JSONPeerId
   declare export type CreateOptions = CreateOptions

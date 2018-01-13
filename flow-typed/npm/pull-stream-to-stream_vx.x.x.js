@@ -2,8 +2,10 @@
 
 import type { Callback } from "callback.flow"
 import type { Source, Through, Sink, Duplex } from "pull-stream"
-import type { Readable, Writable } from "stream"
-import * as stream from "stream"
+import stream from "stream"
+type Readable = typeof stream.Readable
+type DuplexStream = typeof stream.Duplex
+type Writable = typeof stream.Writable
 
 interface PullStreamToStream {
   (Duplex<Error, Buffer>): stream.Duplex;

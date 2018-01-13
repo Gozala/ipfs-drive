@@ -109,7 +109,7 @@ export interface Multiaddr {
   fromStupidString(string): empty;
 }
 
-type Lib = Class<Multiaddr> & {
+type MultiaddrFactory = Class<Multiaddr> & {
   Buffer: typeof Buffer,
   protocols: ProtocolsTable,
   (string | Buffer | Multiaddr): Multiaddr,
@@ -125,7 +125,8 @@ declare module "multiaddr/src/index" {
 }
 
 declare module "multiaddr" {
-  declare export default Lib
+  declare export default MultiaddrFactory
+  declare export type MultiaddrFactory = MultiaddrFactory
   declare export type Code = Code
   declare export type Size = Size
   declare export type ParseError = ParseError

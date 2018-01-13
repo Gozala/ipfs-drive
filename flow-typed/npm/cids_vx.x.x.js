@@ -23,7 +23,7 @@ interface CID {
   equals(CID): boolean;
 }
 
-interface CIDFactory {
+interface CIDConstructor {
   (CID): void;
   (Multihash): void;
   (version: number, codec: CodecName, hash: Multihash): void;
@@ -35,10 +35,11 @@ interface CIDLib {
   validateCID(mixed): void;
 }
 
-type Lib = Class<CID> & CIDFactory & CIDLib
+type CIDFactory = Class<CID> & CIDConstructor & CIDLib
 
 declare module "cids" {
-  declare export default Lib
+  declare export default CIDFactory
+  declare export type CIDFactory = CIDFactory
   declare export type Multihash = Multihash
   declare export type BaseEncodedString = BaseEncodedString
   declare export type Codecs = Codecs

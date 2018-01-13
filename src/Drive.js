@@ -174,8 +174,12 @@ export class DirectoryEntry {
       return this._entries
     } else {
       const directory = await this.fs.entry(this.path)
-      this._entries = await directory.entries()
-      return this._entries
+      if (directory.type === "file") {
+        throw Error("Expected a directory but got a file instead")
+      } else {
+        this._entries = await directory.entries()
+        return this._entries
+      }
     }
   }
 }

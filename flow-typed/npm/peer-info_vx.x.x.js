@@ -25,7 +25,7 @@ export interface PeerInfo {
   isConnected(): boolean;
 }
 
-export type Lib = Class<PeerInfo> & {
+export type PeerInfoFactory = Class<PeerInfo> & {
   constructor(PeerId): void,
   create(Callback<Error, PeerInfo>): void,
   create(PeerId | JSONPeerId, Callback<Error, PeerInfo>): void,
@@ -33,7 +33,8 @@ export type Lib = Class<PeerInfo> & {
 }
 
 declare module "peer-info" {
-  declare export default Lib
+  declare export default PeerInfoFactory
+  declare export type PeerInfoFactory = PeerInfoFactory
   declare export type PeerInfo = PeerInfo
   declare export type PeerId = PeerId
   declare export type JSONPeerId = JSONPeerId
